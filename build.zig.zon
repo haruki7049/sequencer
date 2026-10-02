@@ -10,8 +10,8 @@
             .hash = "phrases-0.1.0-m8uXUcJ5AADNbVNrVA3b_IUJpXPL_dt4kXmkRWEacj9n",
         },
         .resonator = .{
-            .url = "git+https://github.com/haruki7049/resonator#215deacc281ba13d874c48b653b7015bd3a14c36",
-            .hash = "resonator-0.1.0-_vVfzpdiAACUk-4PQJWS7GnHXYXQSL964tE5I21_YL6i",
+            .url = "git+https://github.com/haruki7049/resonator#d429ffaaa591c2f2407661e21965b08bbdfb2ca6",
+            .hash = "resonator-0.1.0-_vVfzphiAACB2Sl3XGOZoDx7rICvskMPRRnjU4M62hLN",
         },
         .lightmix = .{
             .url = "https://github.com/haruki7049/lightmix/archive/refs/tags/0.26.0.tar.gz",

@@ -5,9 +5,11 @@ pub fn build(b: *std.Build) void {
     const optimize = b.standardOptimizeOption(.{});
 
     // Dependencies
+    // lightmix is requested without arguments, like timbrefolio does, so a package that
+    // depends on both resolves a single lightmix module.
     const phrases = b.dependency("phrases", .{ .target = target, .optimize = optimize });
     const resonator = b.dependency("resonator", .{ .target = target, .optimize = optimize });
-    const lightmix = b.dependency("lightmix", .{ .target = target, .optimize = optimize });
+    const lightmix = b.dependency("lightmix", .{});
 
     // Library module declaration
     const mod = b.addModule("sequencer", .{
