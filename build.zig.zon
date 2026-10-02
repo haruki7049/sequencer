@@ -1,0 +1,30 @@
+.{
+    .name = .sequencer,
+    .version = "0.1.0",
+    .fingerprint = 0xc0e7800afbd5b986, // Changing this has security and trust implications.
+    .minimum_zig_version = "0.16.0",
+
+    .dependencies = .{
+        .phrases = .{
+            .url = "git+https://github.com/haruki7049/phrases#524d42fa408e0834efcd2835e0e9a849ea1bd238",
+            .hash = "phrases-0.1.0-m8uXUcJ5AADNbVNrVA3b_IUJpXPL_dt4kXmkRWEacj9n",
+        },
+        .resonator = .{
+            .url = "git+https://github.com/haruki7049/resonator#215deacc281ba13d874c48b653b7015bd3a14c36",
+            .hash = "resonator-0.1.0-_vVfzpdiAACUk-4PQJWS7GnHXYXQSL964tE5I21_YL6i",
+        },
+        .lightmix = .{
+            .url = "https://github.com/haruki7049/lightmix/archive/refs/tags/0.26.0.tar.gz",
+            .hash = "lightmix-0.26.0-SpCovCZcBQBv6Mc5F-Jb99lcspkm-5Bo3m3nowSHKoW3",
+        },
+    },
+
+    .paths = .{
+        "build.zig",
+        "build.zig.zon",
+        "src",
+        "LICENSE-APACHE",
+        "LICENSE-MIT",
+        "README.md",
+    },
+}
