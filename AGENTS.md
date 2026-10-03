@@ -10,18 +10,18 @@ ______________________________________________________________________
 
 - **Library Package**: The public module is registered as `sequencer` via `b.addModule` in `build.zig`, so downstream projects consume it with `b.dependency("sequencer", .{ .target = target, .optimize = optimize })`.
 - **Upstream Boundary**: The dependencies are pinned in `build.zig.zon`:
-  - [`phrases`](https://github.com/haruki7049/phrases) (commit hash): `Position`, `TimeSignature`, and `Position.toSampleOffset`, which decides every event's start frame.
+  - [`meters`](https://github.com/haruki7049/meters) (commit hash): `Position`, `TimeSignature`, and `Position.toSampleOffset`, which decides every event's start frame.
   - [`resonator`](https://github.com/haruki7049/resonator) (commit hash): `Instrument`, re-exported as `sequencer.Instrument`.
   - [`lightmix`](https://github.com/haruki7049/lightmix) (release tag): `Wave(T)`, the type of every event and of the rendered result.
-- **Single Shared Upstream Types**: `resonator` must resolve to the same `phrases` commit as this package (`src/root.zig` tests it), and `lightmix` is requested without build arguments (`b.dependency("lightmix", .{})`), like `timbrefolio` does, so a package that depends on both resolves one `lightmix` module. Keep both properties when bumping a dependency.
-- **Downstream Consumers**: [`pulse`](https://github.com/haruki7049/pulse) pins `sequencer` to a commit hash. A change here reaches it only when it bumps that pin. Treat a change to a public type's fields, a function signature, an error, the ownership of event waves, or the rendered samples (start frames, fade lengths or curves, output length) as a breaking change, and state it in the PR description. Bumping `phrases` can change rendered samples too, since start frames come from `toSampleOffset`.
+- **Single Shared Upstream Types**: `resonator` must resolve to the same `meters` commit as this package (`src/root.zig` tests it), and `lightmix` is requested without build arguments (`b.dependency("lightmix", .{})`), like `timbrefolio` does, so a package that depends on both resolves one `lightmix` module. Keep both properties when bumping a dependency.
+- **Downstream Consumers**: [`pulse`](https://github.com/haruki7049/pulse) pins `sequencer` to a commit hash. A change here reaches it only when it bumps that pin. Treat a change to a public type's fields, a function signature, an error, the ownership of event waves, or the rendered samples (start frames, fade lengths or curves, output length) as a breaking change, and state it in the PR description. Bumping `meters` can change rendered samples too, since start frames come from `toSampleOffset`.
 - **Target Language Version**: Zig `0.16.0`, matching `minimum_zig_version` in `build.zig.zon` and the toolchain pinned in `flake.nix`.
 - **Development Environment**: Managed with Nix, `direnv`, and `nix-direnv`. Formatting across all languages is handled via `treefmt` (nixfmt, zig fmt, actionlint, mdformat, shellcheck, shfmt). `.deps.nix` is the `zon2nix` lockfile of the Zig dependencies for the Nix build.
 - **Source Layout** (`src/`):
   - `root.zig`: Re-exports the public types and `Instrument`.
   - `sequencer.zig`: `Sequencer(T)`, which owns the tracks, validates event formats, schedules every track once, and calls the renderer (`render`, `renderStream`).
   - `track.zig`: `Track(T)`, one monophonic voice lane with its events and `enable_attack_fade`.
-  - `event.zig`: `Event(T)`, a `lightmix.Wave(T)` at a `phrases.Position`, owned or borrowed.
+  - `event.zig`: `Event(T)`, a `lightmix.Wave(T)` at a `meters.Position`, owned or borrowed.
   - `voice-scheduler.zig`: `VoiceScheduler(T)`, which turns positions into frames, sorts events, truncates overlaps and computes the micro-fade bounds.
   - `renderer.zig`: `Renderer(T)`, which mixes scheduled events into one wave (`render`) or block by block (`BlockIterator`).
 - **Rendering Principles**:

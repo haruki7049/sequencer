@@ -7,7 +7,7 @@ pub fn build(b: *std.Build) void {
     // Dependencies
     // lightmix is requested without arguments, like timbrefolio does, so a package that
     // depends on both resolves a single lightmix module.
-    const phrases = b.dependency("phrases", .{ .target = target, .optimize = optimize });
+    const meters = b.dependency("meters", .{ .target = target, .optimize = optimize });
     const resonator = b.dependency("resonator", .{ .target = target, .optimize = optimize });
     const lightmix = b.dependency("lightmix", .{});
 
@@ -17,7 +17,7 @@ pub fn build(b: *std.Build) void {
         .target = target,
         .optimize = optimize,
         .imports = &.{
-            .{ .name = "phrases", .module = phrases.module("phrases") },
+            .{ .name = "meters", .module = meters.module("meters") },
             .{ .name = "resonator", .module = resonator.module("resonator") },
             .{ .name = "lightmix", .module = lightmix.module("lightmix") },
         },

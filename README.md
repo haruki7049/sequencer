@@ -10,7 +10,7 @@ fixed-size blocks. Requires Zig `0.16.0`.
 
 | Package | Used for |
 | :--- | :--- |
-| [`phrases`](https://github.com/haruki7049/phrases) | `Position`, `TimeSignature` |
+| [`meters`](https://github.com/haruki7049/meters) | `Position`, `TimeSignature` |
 | [`resonator`](https://github.com/haruki7049/resonator) | `Instrument` (string-to-track mapping) |
 | [`lightmix`](https://github.com/haruki7049/lightmix) | `Wave(T)` |
 
@@ -20,7 +20,7 @@ fixed-size blocks. Requires Zig `0.16.0`.
 | :--- | :--- |
 | `Sequencer(T)` | Owns tracks; `createTrack`, `createInstrument`, `add`, `addInstrument`, `render`, `renderStream` |
 | `Track(T)` | Monophonic voice lane holding an ordered list of events |
-| `Event(T)` | A `lightmix.Wave(T)` placed at a `phrases.Position` (owned or borrowed) |
+| `Event(T)` | A `lightmix.Wave(T)` placed at a `meters.Position` (owned or borrowed) |
 | `VoiceScheduler(T)` | Converts positions to sample frames, truncates overlapping notes, computes micro-fade bounds |
 | `Renderer(T)` | Mixes scheduled events into a wave, or block by block (`BlockIterator`) |
 | `StreamOptions` | Block size for `renderStream` (default 4096 frames) |
