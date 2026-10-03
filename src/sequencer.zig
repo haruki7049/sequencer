@@ -2,8 +2,8 @@
 
 const std = @import("std");
 const lightmix = @import("lightmix");
-const Position = @import("phrases").Position;
-const TimeSignature = @import("phrases").TimeSignature;
+const Position = @import("meters").Position;
+const TimeSignature = @import("meters").TimeSignature;
 const Track = @import("track.zig").inner;
 const Instrument = @import("resonator").Instrument;
 const VoiceScheduler = @import("voice-scheduler.zig").inner;

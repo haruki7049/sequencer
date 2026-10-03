@@ -1,6 +1,6 @@
 //! Multi-track event sequencer and renderer.
 //!
-//! Schedules `lightmix.Wave` events at musical positions (`phrases.Position`) on monophonic tracks,
+//! Schedules `lightmix.Wave` events at musical positions (`meters.Position`) on monophonic tracks,
 //! groups tracks into multi-string instruments (`resonator.Instrument`), truncates overlapping voices
 //! with equal-power micro-fades, and renders the result into a single wave or a block stream.
 
@@ -24,8 +24,8 @@ test {
     _ = @import("sequencer.zig");
 }
 
-test "phrases types are shared with resonator" {
-    // resonator and sequencer must resolve to the same `phrases` package so positions flow between them.
-    try std.testing.expect(@import("resonator").phrases.Position == @import("phrases").Position);
-    try std.testing.expect(@import("resonator").phrases.TimeSignature == @import("phrases").TimeSignature);
+test "meters types are shared with resonator" {
+    // resonator and sequencer must resolve to the same `meters` package so positions flow between them.
+    try std.testing.expect(@import("resonator").meters.Position == @import("meters").Position);
+    try std.testing.expect(@import("resonator").meters.TimeSignature == @import("meters").TimeSignature);
 }

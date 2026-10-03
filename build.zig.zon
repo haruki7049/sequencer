@@ -5,13 +5,13 @@
     .minimum_zig_version = "0.16.0",
 
     .dependencies = .{
-        .phrases = .{
-            .url = "git+https://github.com/haruki7049/phrases#524d42fa408e0834efcd2835e0e9a849ea1bd238",
-            .hash = "phrases-0.1.0-m8uXUcJ5AADNbVNrVA3b_IUJpXPL_dt4kXmkRWEacj9n",
+        .meters = .{
+            .url = "git+https://github.com/haruki7049/meters#567f70a073fc861418f1dc02d05d08de5957e91d",
+            .hash = "meters-0.1.0-EsVLmyDGAACE-3GCOOjWTlD5YV2ZVUXIxeweZgj5gl5H",
         },
         .resonator = .{
-            .url = "git+https://github.com/haruki7049/resonator#d429ffaaa591c2f2407661e21965b08bbdfb2ca6",
-            .hash = "resonator-0.1.0-_vVfzphiAACB2Sl3XGOZoDx7rICvskMPRRnjU4M62hLN",
+            .url = "git+https://github.com/haruki7049/resonator#e61422fe5325678a57e9001be8b200c398d30d67",
+            .hash = "resonator-0.1.0-_vVfzntkAADp3E5l_J_eO8iMSPBnFO_3-SwYredkPCzO",
         },
         .lightmix = .{
             .url = "https://github.com/haruki7049/lightmix/archive/refs/tags/0.26.0.tar.gz",

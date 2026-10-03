@@ -2,7 +2,7 @@
 
 const std = @import("std");
 const lightmix = @import("lightmix");
-const Position = @import("phrases").Position;
+const Position = @import("meters").Position;
 
 /// Returns an Event type parameterized by sample floating-point type T.
 pub fn inner(comptime T: type) type {
