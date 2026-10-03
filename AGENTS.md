@@ -70,6 +70,13 @@ Run these inside the Nix development shell (`nix develop` or `direnv allow`). CI
 
 **Updating dependencies**: After changing a dependency in `build.zig.zon` (`zig fetch --save <url>`), run `zon2nix > .deps.nix` in the dev shell, then `treefmt`, and commit both files together. The sandboxed Nix build has no network access and pre-fetches the Zig dependencies from `.deps.nix` (see `flake.nix`).
 
+- **Fix the tarball URLs**: `zon2nix` writes each `fetchzip` URL as `https://codeload.github.com/<owner>/<repo>/tar.gz/refs/tags/<tag>`. Its last path segment has no archive extension, so `fetchzip` fails with `do not know how to unpack source archive`. Set each such `url` back to the `url` in `build.zig.zon` (`https://github.com/<owner>/<repo>/archive/refs/tags/<tag>.tar.gz`) and keep the generated `hash`: both URLs serve the same tarball. `fetchgit` entries need no change.
+- **Fetch every dependency again**: `nix flake check` does not catch a broken `url` when the store already holds a result with the same hash, because a fixed-output derivation is not fetched again; CI, starting from an empty store, does catch it. After `nix flake check` passes, run this in the repository root. It fetches every entry of `.deps.nix` again and compares the result with its `hash`, without `sudo` or garbage collection:
+
+```sh
+nix eval --raw --impure --expr 'let pkgs = import (builtins.getFlake (toString ./.)).inputs.nixpkgs { }; in builtins.concatStringsSep "\n" (map (p: p.drvPath + "^out") (builtins.attrValues (pkgs.callPackage ./.deps.nix { }).entries))' | xargs nix build --no-link --rebuild
+```
+
 ______________________________________________________________________
 
 ## 4. Coding Conventions
